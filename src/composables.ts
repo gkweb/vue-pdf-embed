@@ -1,13 +1,18 @@
 import {
   onBeforeUnmount,
   shallowRef,
-  toValue,
+  unref,
   watch,
   watchEffect,
   type ComputedRef,
-  type MaybeRef,
+  // type MaybeRef,
+  type Ref,
   type ShallowRef,
 } from 'vue'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type MaybeRef<T = any> = T | Ref<T>
+
 import { PasswordResponses, getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 import type {
   OnProgressParameters,
@@ -33,7 +38,7 @@ export function useVuePdfEmbed({
   const docLoadingTask = shallowRef<PDFDocumentLoadingTask | null>(null)
 
   watchEffect(async () => {
-    const sourceValue = toValue(source)
+    const sourceValue = unref(source)
 
     if (!sourceValue) {
       return
@@ -91,7 +96,7 @@ export function useVuePdfEmbed({
       docLoadingTask.value.onProgress = null
     }
     docLoadingTask.value?.destroy()
-    if (!isDocument(toValue(source))) {
+    if (!isDocument(unref(source))) {
       doc.value?.destroy()
     }
   })

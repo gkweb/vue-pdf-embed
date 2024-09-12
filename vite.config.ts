@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue2'
 import copy from 'rollup-plugin-copy'
 import CleanCSS from 'clean-css'
 import type { RollupOptions } from 'rollup'
