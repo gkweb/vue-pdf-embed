@@ -444,6 +444,7 @@ defineExpose({
   doc,
   download,
   print,
+  render,
 })
 </script>
 
